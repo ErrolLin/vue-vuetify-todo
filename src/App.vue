@@ -2,15 +2,22 @@
 import { reactive, toRefs } from "vue";
 import { RouterView } from "vue-router";
 
+import MountainImg from "./assets/images/mountain.jpg";
+
 const state = reactive({
   drawer: false,
   items: [
     { title: "Todo", value: "todo", icon: "mdi-format-list-checks", url: "/" },
     { title: "About", value: "about", icon: "mdi-help-box", url: "/about" },
   ],
+  barIcons: [
+    { id: 1, icon: "mdi-magnify" },
+    { id: 2, icon: "mdi-heart" },
+    { id: 3, icon: "mdi-dots-vertical" },
+  ],
 });
 
-const { drawer, items } = toRefs(state);
+const { drawer, items, barIcons } = toRefs(state);
 </script>
 
 <template>
@@ -38,9 +45,26 @@ const { drawer, items } = toRefs(state);
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Application</v-toolbar-title>
+    <v-app-bar app color="primary" density="prominent" :image="MountainImg">
+      <template v-slot:image>
+        <v-img
+          gradient="to top right, rgba(197,17,98,.5), rgba(128,20,199,.5)"
+        ></v-img>
+      </template>
+
+      <template v-slot:prepend>
+        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      </template>
+
+      <template v-slot:title>
+        <v-toolbar-title>Vuetify Todo</v-toolbar-title>
+      </template>
+
+      <template v-slot:append>
+        <v-btn icon v-for="item in barIcons" :key="item.id">
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-btn>
+      </template>
     </v-app-bar>
 
     <v-main>
