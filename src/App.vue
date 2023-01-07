@@ -2,7 +2,8 @@
 import { reactive, toRefs } from "vue";
 import { RouterView } from "vue-router";
 
-import MountainImg from "./assets/images/mountain.jpg";
+import MountainImg from "@/assets/images/mountain.jpg";
+import { SnackBar } from "@/components/common";
 
 const state = reactive({
   drawer: false,
@@ -69,6 +70,7 @@ const { drawer, items, barIcons } = toRefs(state);
 
     <v-main>
       <RouterView />
+      <SnackBar />
     </v-main>
   </v-app>
 </template>

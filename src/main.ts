@@ -8,10 +8,10 @@ import { aliases, mdi } from "vuetify/iconsets/mdi";
 import "@mdi/font/scss/materialdesignicons.scss";
 import "vuetify/styles";
 
-import App from "./App.vue";
-import router from "./router";
+import App from "@/App.vue";
+import router from "@/router";
 
-import "./assets/main.scss";
+import "@/assets/main.scss";
 
 const app = createApp(App);
 

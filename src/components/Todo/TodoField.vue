@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive, toRefs } from "vue";
 
-import { useTaskStore } from "@/stores";
+import { useTaskStore, useSnackBarStore } from "@/stores";
 
 const state = reactive<{
   newTaskTitle: string;
@@ -12,12 +12,14 @@ const state = reactive<{
 const { newTaskTitle } = toRefs(state);
 
 const taskStore = useTaskStore();
+const snackBarStore = useSnackBarStore();
 
 const handleAddTask = () => {
   if (newTaskTitle.value === "") {
     return;
   }
   taskStore.addTask(newTaskTitle);
+  snackBarStore.showSnackBar("Task Added!");
   newTaskTitle.value = "";
 };
 </script>

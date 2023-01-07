@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useTaskStore } from "@/stores";
+import { useTaskStore, useSnackBarStore } from "@/stores";
 import type { Task } from "@/types";
 
 const props = defineProps<{ task: Task }>();
@@ -10,6 +10,7 @@ const task = computed<Task>(() => {
 });
 
 const taskStore = useTaskStore();
+const snackBarStore = useSnackBarStore();
 
 const handleDoneTask = (id: number) => {
   taskStore.doneTask(id);
@@ -17,6 +18,7 @@ const handleDoneTask = (id: number) => {
 
 const handleDeleteTask = (id: number) => {
   taskStore.deleteTask(id);
+  snackBarStore.showSnackBar("Task Deleted!");
 };
 </script>
 
