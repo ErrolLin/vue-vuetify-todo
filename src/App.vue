@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { SnackBar, DialogBox } from "@/components/common";
+
 import { reactive, toRefs } from "vue";
 import { RouterView } from "vue-router";
 
 import MountainImg from "@/assets/images/mountain.jpg";
-import { SnackBar } from "@/components/common";
 
 const state = reactive({
   drawer: false,
@@ -71,6 +72,7 @@ const { drawer, items, barIcons } = toRefs(state);
     <v-main>
       <RouterView />
       <SnackBar />
+      <DialogBox />
     </v-main>
   </v-app>
 </template>
