@@ -38,10 +38,25 @@ export const useTaskStore = defineStore("task", () => {
     });
   }
 
+  function updateTask(editTask: Task) {
+    const task = tasks.value.filter((task) => {
+      return task.id === editTask.id;
+    })[0];
+    task.title = editTask.title;
+  }
+
+  function getTaskById(id: number) {
+    return tasks.value.filter((task) => {
+      return task.id === id;
+    })[0];
+  }
+
   return {
     tasks,
     addTask,
     doneTask,
     deleteTask,
+    updateTask,
+    getTaskById,
   };
 });
