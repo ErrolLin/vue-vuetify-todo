@@ -39,13 +39,13 @@ const handleAddTask = () => {
     @click:append-inner="handleAddTask"
     @keyup.enter="handleAddTask"
   >
-    <!-- <template v-slot:append-inner="{ isFocused }">
-        <v-icon
-          icon="mdi-plus"
-          color="pink-accent-1"
-          @click="handleAddTask"
-        ></v-icon>
-      </template> -->
+    <!-- <template v-slot:append-inner>
+      <v-icon
+        icon="mdi-plus"
+        color="pink-accent-3"
+        @click="handleAddTask"
+      ></v-icon>
+    </template> -->
   </v-text-field>
 </template>
 

@@ -46,6 +46,7 @@ const snackBarStore = useSnackBarStore();
 
 const handleDoneTask = (id: number) => {
   taskStore.doneTask(id);
+  dialogStore.hideDialog();
 };
 
 const handleDeleteTask = () => {
@@ -85,10 +86,19 @@ const handleEditTask = () => {
 };
 
 const handleConfirmEdit = (taskId: number, taskTitle: string) => {
+  if (taskTitle == "" || taskTitle == null) {
+    snackBarStore.showSnackBar("Task title can't be empty!");
+    return;
+  }
   let task = taskStore.getTaskById(taskId);
+  if (task.title == taskTitle) {
+    snackBarStore.showSnackBar("Task title is the same as before!");
+    return;
+  }
   task.title = taskTitle;
   taskStore.updateTask(task);
   snackBarStore.showSnackBar("Task Updated!");
+  dialogStore.hideDialog();
 };
 </script>
 

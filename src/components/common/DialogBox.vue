@@ -16,7 +16,6 @@ const { isShow, dialog } = storeToRefs(dialogStore);
 
 const handleConfirmDialog = () => {
   dialog.value.confirm.event(dialogInputText.value);
-  dialogStore.hideDialog();
 };
 
 const handleCancelDialog = () => {
@@ -51,7 +50,6 @@ onUpdated(() => {
           v-if="dialog.type === 'PROMPT' && dialog.data"
           color="pink-accent-2"
           density="compact"
-          label="Edit Task"
           placeholder="Please enter a task."
           variant="underlined"
           hide-details
@@ -69,6 +67,7 @@ onUpdated(() => {
         <v-btn
           variant="text"
           color="pink-accent-2"
+          :disabled="!dialogInputText"
           @click="handleConfirmDialog"
         >
           {{ dialog.confirm.text }}
