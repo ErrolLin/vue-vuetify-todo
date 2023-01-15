@@ -23,11 +23,11 @@ const handleCancelDialog = () => {
 };
 
 onMounted(() => {
-  dialogInputText.value = dialog.value.data;
+  dialogInputText.value = dialog.value.data?.inputText;
 });
 
 onUpdated(() => {
-  dialogInputText.value = dialog.value.data;
+  dialogInputText.value = dialog.value.data?.inputText;
 });
 </script>
 <template>
@@ -48,9 +48,10 @@ onUpdated(() => {
         {{ dialog.content }}
         <v-text-field
           v-if="dialog.type === 'PROMPT' && dialog.data"
+          :type="dialog.data.inputType ?? 'text'"
           color="pink-accent-2"
           density="compact"
-          placeholder="Please enter a task."
+          :placeholder="dialog.data.placeholder ?? 'Please enter a value.'"
           variant="underlined"
           hide-details
           clearable

@@ -8,5 +8,9 @@ export type Dialog = {
     event: (e?: any) => void;
   };
   cancel: string;
-  data?: string;
+  data: {
+    inputType?: "text" | "date";
+    inputText: string;
+    placeholder?: string;
+  } | null;
 };

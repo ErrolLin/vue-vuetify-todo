@@ -18,7 +18,7 @@ export const useDialogStore = defineStore("dialog", () => {
         event: () => {},
       },
       cancel: "",
-      data: "",
+      data: null,
     },
   });
 
@@ -39,7 +39,7 @@ export const useDialogStore = defineStore("dialog", () => {
         event: () => {},
       },
       cancel: "",
-      data: "",
+      data: null,
     };
     isShow.value = false;
   }
