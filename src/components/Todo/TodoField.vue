@@ -26,8 +26,8 @@ const handleAddTask = () => {
 
 <template>
   <v-text-field
-    class="pa-3"
-    color="pink-accent-2"
+    class="pa-3 pink-accent-3"
+    color="pink-accent-3"
     density="compact"
     label="Add Task"
     append-inner-icon="mdi-plus"

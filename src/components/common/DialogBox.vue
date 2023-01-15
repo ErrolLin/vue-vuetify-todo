@@ -47,14 +47,15 @@ onUpdated(() => {
       <v-card-subtitle v-if="dialog.type === 'PROMPT'">
         {{ dialog.content }}
         <v-text-field
+          :class="dialog.data.inputText !== 'date' ? 'text-pink-accent-3' : ''"
           v-if="dialog.type === 'PROMPT' && dialog.data"
           :type="dialog.data.inputType ?? 'text'"
-          color="pink-accent-2"
+          color="pink-accent-3"
           density="compact"
           :placeholder="dialog.data.placeholder ?? 'Please enter a value.'"
           variant="underlined"
           hide-details
-          clearable
+          :clearable="dialog.data.inputText !== 'date'"
           v-model:model-value="dialogInputText"
           @keyup.enter="handleConfirmDialog"
         />
