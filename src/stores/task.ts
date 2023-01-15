@@ -8,9 +8,24 @@ import type { Task } from "@/types";
 export const useTaskStore = defineStore("task", () => {
   const taskState = reactive<{ tasks: Array<Task> }>({
     tasks: [
-      { id: 1, title: "Wake Up", done: false },
-      { id: 2, title: "Get Bananas", done: false },
-      { id: 3, title: "Eat Bananas", done: false },
+      {
+        id: 1,
+        title: "Wake Up",
+        done: false,
+        deadline: "2023-01-14",
+      },
+      {
+        id: 2,
+        title: "Get Bananas",
+        done: false,
+        deadline: "2023-01-21",
+      },
+      {
+        id: 3,
+        title: "Eat Bananas",
+        done: false,
+        deadline: null,
+      },
     ],
   });
 
@@ -21,6 +36,7 @@ export const useTaskStore = defineStore("task", () => {
       id: Date.now(),
       title: newTaskTitle.value,
       done: false,
+      deadline: null,
     };
     tasks.value.push(newTask);
   }

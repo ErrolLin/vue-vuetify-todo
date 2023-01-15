@@ -2,6 +2,7 @@
 import TodoMenu from "@/components/Todo/TodoMenu.vue";
 
 import { computed, reactive, toRefs } from "vue";
+import { format } from "date-fns";
 
 import { useTaskStore, useDialogStore, useSnackBarStore } from "@/stores";
 import type { Menu, Task } from "@/types";
@@ -11,6 +12,12 @@ const props = defineProps<{ task: Task }>();
 const task = computed<Task>(() => {
   return props.task;
 });
+
+const formattedDate = computed<(value: string) => string>(
+  () => (value: string) => {
+    return format(new Date(value), "MMM do,yyyy");
+  }
+);
 
 const state = reactive<{
   menus: Array<Menu>;
@@ -61,6 +68,7 @@ const handleDeleteTask = () => {
       },
     },
     cancel: "No",
+    data: null,
   });
 };
 
@@ -81,7 +89,10 @@ const handleEditTask = () => {
       },
     },
     cancel: "CANCEL",
-    data: task.value.title,
+    data: {
+      inputText: task.value.title,
+      placeholder: "Please enter a new task.",
+    },
   });
 };
 
@@ -123,6 +134,13 @@ const handleConfirmEdit = (taskId: number, taskTitle: string) => {
       </v-list-item-title>
 
       <template v-slot:append>
+        <div
+          class="text-grey-darken-1 d-flex flex-row justify-center align-center"
+          v-if="task.deadline"
+        >
+          <v-icon size="small" icon="mdi-calendar"></v-icon>
+          <span>{{ formattedDate(task.deadline) }}</span>
+        </div>
         <TodoMenu :menus="menus" />
       </template>
     </v-list-item>
