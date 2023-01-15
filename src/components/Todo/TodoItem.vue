@@ -33,7 +33,9 @@ const state = reactive<{
     {
       title: "DUE DATE",
       icon: "mdi-calendar",
-      event: () => {},
+      event: () => {
+        handleEditDeadline();
+      },
     },
     {
       title: "DELETE",
@@ -109,6 +111,42 @@ const handleConfirmEdit = (taskId: number, taskTitle: string) => {
   task.title = taskTitle;
   taskStore.updateTask(task);
   snackBarStore.showSnackBar("Task Updated!");
+  dialogStore.hideDialog();
+};
+
+const handleEditDeadline = () => {
+  dialogStore.showDialog({
+    type: "PROMPT",
+    title: "INFO",
+    content: "Please edit the current todo content.",
+    confirm: {
+      text: "SAVE",
+      event: (deadline: string) => {
+        handleConfirmEditDeadline(task.value.id, deadline);
+      },
+    },
+    cancel: "CANCEL",
+    data: {
+      inputType: "date",
+      inputText: task.value.deadline ?? "",
+      placeholder: "Please select a new deadline",
+    },
+  });
+};
+
+const handleConfirmEditDeadline = (taskId: number, deadline: string) => {
+  if (deadline == "") {
+    snackBarStore.showSnackBar("Task deadline can't be empty string!");
+    return;
+  }
+  let task = taskStore.getTaskById(taskId);
+  if (task.deadline == deadline) {
+    snackBarStore.showSnackBar("Task deadline is the same as before!");
+    return;
+  }
+  task.deadline = deadline;
+  taskStore.updateTask(task);
+  snackBarStore.showSnackBar("Task Deadline Updated!");
   dialogStore.hideDialog();
 };
 </script>

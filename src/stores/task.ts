@@ -59,6 +59,7 @@ export const useTaskStore = defineStore("task", () => {
       return task.id === editTask.id;
     })[0];
     task.title = editTask.title;
+    task.deadline = editTask.deadline;
   }
 
   function getTaskById(id: number) {
